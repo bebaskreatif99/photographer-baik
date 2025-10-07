@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block description %}Dapatkan penawaran terbaik untuk paket fotografi {{ category_name }} profesional dari Photographer.Baik.{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-light">
+    <h1 class="page-title">{{ title }}</h1>
+    <p class="section-subtitle">Abadikan setiap momen berharga Anda dengan layanan dokumentasi terbaik dari kami.</p>
+    
+    <div class="container packages-grid">
+        {% for package in packages %}
+        <div class="package-card">
+            <h3>{{ package.name }}</h3>
+            <div class="price">{{ package.price }}</div>
+            <ul>
+                {% for feature in package.get_features_list() %}
+                <li>{{ feature }}</li>
+                {% endfor %}
+            </ul>
+            <a href="https://wa.me/6285741676692?text=Halo,%20saya%20tertarik%20dengan%20paket%20{{ category_name|capitalize }}%20'{{ package.name }}'.%20Bisa%20info%20lebih%20lanjut?" target="_blank" class="cta-button">Pesan Sekarang</a>
+        </div>
+        {% else %}
+        <p style="text-align: center; grid-column: 1 / -1; color: var(--text-muted); padding: 50px 0;">
+            Belum ada paket yang tersedia untuk kategori ini. Silakan cek kembali nanti.
+        </p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

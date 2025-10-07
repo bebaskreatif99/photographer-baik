@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} - Photographer.Baik Blog{% endblock %}
+{% block description %}Baca artikel terbaru kami: {{ post.title }}. Dapatkan tips dan inspirasi fotografi dari Photographer.Baik.{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-light">
+    <div class="container post-detail-content">
+        <h1 class="post-title">{{ post.title }}</h1>
+        <p class="post-meta">Oleh <span>{{ post.author }}</span> pada <span>{{ post.date }}</span> &bull; Kategori: <span class="post-category">{{ post.category }}</span></p>
+        <img src="{{ url_for('static', filename='uploads/' + post.image) }}" alt="{{ post.title }}" class="post-main-image">
+        <div class="post-body">
+            {# Filter 'safe' digunakan agar tag HTML di dalam konten bisa dirender dengan benar #}
+            {{ post.content | safe }}
+        </div>
+        
+        <div class="share-section mt-5">
+            <h3 class="share-title">Bagikan Artikel Ini:</h3>
+            <div class="share-buttons">
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" target="_blank" class="share-btn facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
+                <a href="https://twitter.com/intent/tweet?url={{ request.url }}&text={{ post.title }}" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter/X</a>
+                <a href="https://api.whatsapp.com/send?text={{ post.title }}%20{{ request.url }}" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="https://t.me/share/url?url={{ request.url }}&text={{ post.title }}" target="_blank" class="share-btn telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+            </div>
+        </div>
+
+        <a href="{{ url_for('blog') }}" class="back-to-blog">← Kembali ke Blog</a>
+    </div>
+</section>
+{% endblock %}

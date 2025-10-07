@@ -1,0 +1,24 @@
+<header class="header">
+    <a href="/" class="logo">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Photographer.Baik Logo">
+    </a>
+    <nav class="navbar-links">
+        <a href="/">Beranda</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Paket <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-content">
+                <a href="{{ url_for('packages', category_name='prewedding') }}">Prewedding</a>
+                <a href="{{ url_for('packages', category_name='wedding') }}">Wedding</a>
+                <a href="{{ url_for('packages', category_name='event') }}">Event</a>
+            </div>
+        </div>
+        <a href="{{ url_for('gallery') }}">Galeri</a>
+        <a href="{{ url_for('blog') }}">Blog</a>
+        <a href="{{ url_for('about') }}">Tentang Kami</a>
+    </nav>
+    <div class="hamburger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</header>

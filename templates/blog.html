@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Blog Fotografi - Photographer.Baik{% endblock %}
+{% block description %}Tips, cerita, dan inspirasi dari dunia fotografi. Baca artikel terbaru dari tim Photographer.Baik.{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-light">
+    <h1 class="page-title">Blog Kami</h1>
+    <p class="section-subtitle">Tips, cerita, dan inspirasi dari dunia fotografi.</p>
+
+    <div class="container blog-grid">
+        {% for post in posts %}
+        <a href="{{ url_for('post_detail', post_id=post.id) }}" class="blog-post-card">
+            <img data-src="{{ url_for('static', filename='uploads/' + post.image) }}" class="lazyload" alt="{{ post.title }}">
+            <div class="card-content">
+                <h3>{{ post.title }}</h3>
+                <p class="post-meta">Oleh {{ post.author }} pada {{ post.date }}</p>
+                <span class="post-category">{{ post.category }}</span>
+            </div>
+        </a>
+        {% else %}
+        <p style="text-align: center; grid-column: 1 / -1; color: var(--text-muted); padding: 50px 0;">Belum ada artikel blog. Tambahkan artikel di panel admin!</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

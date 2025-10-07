@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}Jasa Fotografi Profesional - Photographer.Baik{% endblock %}
+{% block description %}Jasa fotografi profesional untuk prewedding, wedding, dan event di Indonesia. Abadikan momen berharga Anda dengan Photographer.Baik.{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+    <div class="swiper hero-swiper">
+        <div class="swiper-wrapper">
+            
+            {% for slide in hero_slides %}
+            <div class="swiper-slide" style="background-image: url('{{ url_for('static', filename=HERO_URL_RELATIVE + '/' + slide.image_filename) }}');">
+                <div class="hero-content">
+                    <h1>{{ slide.title }}</h1>
+                    <p>{{ slide.subtitle }}</p>
+                    <a href="{{ slide.cta_url }}" class="cta-button">{{ slide.cta_text }}</a>
+                </div>
+            </div>
+            {% else %}
+            {# Bagian ini akan tampil jika tidak ada slide sama sekali di database #}
+            <div class="swiper-slide" style="background-color: #333;">
+                <div class="hero-content">
+                    <h1>Selamat Datang</h1>
+                    <p>Belum ada slide aktif. Silakan tambahkan melalui panel admin.</p>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</section>
+
+<section id="featured-works" class="section-padding bg-white">
+    <h2 class="section-title">Karya Unggulan Kami</h2>
+    <p class="section-subtitle">Intip beberapa proyek terbaik yang telah kami abadikan.</p>
+    <div class="container featured-grid">
+        {% for photo in featured_photos %}
+        <a href="{{ url_for('gallery', category=photo.category) }}" class="featured-card">
+            <img data-src="{{ url_for('static', filename=PHOTO_URL_RELATIVE + photo.filename) }}" class="lazyload" alt="Karya unggulan {{ photo.category }}">
+            <div class="card-overlay">
+                <h3>{{ photo.category }}</h3>
+            </div>
+        </a>
+        {% else %}
+        <p style="text-align: center; grid-column: 1 / -1; color: var(--text-muted); padding: 50px 0;">Belum ada foto unggulan. Tambahkan foto di panel admin dan tandai sebagai 'featured'!</p>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-5">
+        <a href="{{ url_for('gallery') }}" class="cta-button">Lihat Semua Galeri</a>
+    </div>
+</section>
+
+<section class="section-padding bg-light text-center">
+    <div class="container">
+        <h2 class="section-title">Tertarik untuk Berkolaborasi?</h2>
+        <p class="section-subtitle">Mari diskusikan bagaimana kami bisa membantu mengabadikan momen berharga Anda. Hubungi kami untuk konsultasi gratis.</p>
+        <a href="https://wa.me/6285741676692" target="_blank" class="cta-button">Hubungi Kami Sekarang</a>
+    </div>
+</section>
+
+{% if recent_posts %}
+<section class="section-padding bg-white">
+    <h2 class="section-title">Artikel Terbaru Kami</h2>
+    <p class="section-subtitle">Baca tips dan cerita menarik dari dunia fotografi.</p>
+    <div class="container blog-grid">
+        {% for post in recent_posts %}
+        <a href="{{ url_for('post_detail', slug=post.slug) }}" class="blog-post-card">
+            {% if post.thumbnail_filename %}
+            <img data-src="{{ url_for('static', filename=BLOG_URL_RELATIVE + post.thumbnail_filename) }}" class="lazyload" alt="{{ post.title }}">
+            {% endif %}
+            <div class="card-content">
+                <h3>{{ post.title }}</h3>
+                <p class="post-meta">Oleh {{ post.author }} pada {{ post.created_at.strftime('%d %B %Y') }}</p>
+                <span class="post-category">{{ post.category }}</span>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-5">
+        <a href="{{ url_for('blog') }}" class="cta-button">Lihat Semua Artikel</a>
+    </div>
+</section>
+{% endif %}
+
+{% endblock %}

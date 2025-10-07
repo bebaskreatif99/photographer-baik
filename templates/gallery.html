@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Galeri Portofolio - Photographer.Baik{% endblock %}
+{% block description %}Lihat portofolio karya terbaik dari Photographer.Baik. Galeri foto prewedding, wedding, dan berbagai event spesial lainnya.{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-light">
+    <h1 class="page-title">Galeri Portofolio</h1>
+    <p class="section-subtitle">Beberapa karya terbaik yang pernah kami abadikan.</p>
+                
+    <div class="container text-center mb-5">
+        <div class="category-filter">
+            <a href="{{ url_for('gallery', category='All') }}" class="filter-button {% if selected_category == 'All' %}active{% endif %}">Semua</a>
+            {% for category in categories %}
+            <a href="{{ url_for('gallery', category=category) }}" class="filter-button {% if selected_category == category %}active{% endif %}">{{ category }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="container gallery-grid simple-lightbox">
+        {% for photo in photos %}
+        <a href="{{ url_for('static', filename='uploads/' + photo.filename) }}" class="gallery-item" data-category="{{ photo.category }}">
+            <img data-src="{{ url_for('static', filename='uploads/' + photo.filename) }}" class="lazyload" alt="Foto {{ photo.category }}">
+        </a>
+        {% else %}
+        <p style="text-align: center; grid-column: 1 / -1; color: var(--text-muted); padding: 50px 0;">Belum ada foto di galeri. Tambahkan foto di panel admin!</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(function(){
+        // SimpleLightbox diinisialisasi pada kontainer yang memiliki class 'simple-lightbox'
+        var lightbox = $('.simple-lightbox a').simpleLightbox({
+            overlayOpacity: 0.9,
+            animationSpeed: 250,
+            fadeSpeed: 300,
+            // Tambahan untuk caption dari alt atau title
+            captionsData: 'alt', 
+            captionDelay: 250,
+            closeText: 'Tutup',
+            navText: ['Prev', 'Next']
+        });
+    });
+</script>
+{% endblock %}

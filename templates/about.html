@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Tentang Kami - Photographer.Baik{% endblock %}
+{% block description %}Kenali tim di balik Photographer.Baik, studio fotografi profesional yang berdedikasi mengabadikan momen spesial Anda.{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-light text-center">
+    <div class="container about-content-wrapper">
+        <h1 class="page-title">Tentang Kami</h1>
+        <p class="section-subtitle">Siapa kami dan apa yang kami tawarkan.</p>
+        
+        <img src="{{ url_for('static', filename='images/about-profile.jpg') }}" alt="Tim Photographer.Baik" class="about-profile-image">
+        
+        <div class="text-left mt-5">
+            <h2 class="section-subheading">Visi Kami</h2>
+            <p>Menjadi mitra terpercaya dalam mengabadikan setiap cerita dan emosi, mengubahnya menjadi karya visual yang indah dan tak terlupakan.</p>
+
+            <h2 class="section-subheading">Misi Kami</h2>
+            <ul>
+                <li>Memberikan layanan fotografi berkualitas tinggi dengan sentuhan personal.</li>
+                <li>Mengembangkan kreativitas dan inovasi dalam setiap proyek.</li>
+                <li>Menciptakan pengalaman yang nyaman dan menyenangkan bagi setiap klien.</li>
+                <li>Menjaga profesionalisme dan integritas dalam setiap aspek pekerjaan.</li>
+            </ul>
+
+            <h2 class="section-subheading">Apa yang Kami Tawarkan?</h2>
+            <p>Photographer.Baik menyediakan layanan fotografi profesional untuk berbagai kebutuhan, antara lain:</p>
+            <ul>
+                <li>**Prewedding:** Sesi foto romantis dengan konsep yang unik dan personal.</li>
+                <li>**Wedding:** Liputan lengkap hari pernikahan Anda, mengabadikan setiap momen sakral dan kebahagiaan.</li>
+                <li>**Event:** Dokumentasi acara-acara penting seperti ulang tahun, wisuda, gathering, dan lain-lain.</li>
+                <li>**Personal & Family Portraits:** Sesi foto individu, pasangan, atau keluarga untuk menciptakan kenangan berharga.</li>
+            </ul>
+            <p>Dengan tim yang berpengalaman dan peralatan terbaik, kami berkomitmen untuk menghasilkan foto-foto yang tidak hanya indah, tetapi juga penuh makna dan cerita.</p>
+            <p>Jangan ragu untuk <a href="https://wa.me/6285741676692" target="_blank" class="text-link">menghubungi kami</a> untuk berdiskusi lebih lanjut mengenai kebutuhan fotografi Anda. Kami siap mewujudkan visi Anda menjadi kenyataan.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}Jasa fotografi profesional untuk prewedding, wedding, dan event. Abadikan momen berharga Anda dengan Photographer.Baik.{% endblock %}">
+    <title>{% block title %}Photographer.Baik{% endblock %}</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/simple-lightbox.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    {% block head_extra %}{% endblock %} 
+</head>
+<body>
+    {% include 'partials/navbar.html' %}
+
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flashes-container">
+                {% for category, message in messages %}
+                <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include 'partials/footer.html' %}
+
+    <button id="scrollToTopBtn" title="Kembali ke Atas"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/simple-lightbox.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lazysizes.min.js') }}" async=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    {# Script untuk CKEditor, hanya akan berfungsi di halaman admin #}
+    {% if request.path.startswith('/admin/blog/') %}
+    <script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            CKEDITOR.replace('content');
+        });
+    </script>
+    {% endif %}
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>
