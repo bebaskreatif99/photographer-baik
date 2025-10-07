@@ -19,8 +19,13 @@ app = Flask(__name__)
 
 # Konfigurasi penting: Ganti 'your_super_secret_key_change_me' dengan kunci acak yang kuat.
 # Sebaiknya gunakan environment variable di lingkungan produksi.
+# Ambil SECRET_KEY dari environment variable
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+
+# Ambil DATABASE_URL dari environment variable
+DATABASE_URL = os.environ.get('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -33,8 +38,8 @@ BLOG_UPLOAD_FOLDER = os.path.join(UPLOAD_FOLDER_ROOT, 'blog_images')
 HERO_UPLOAD_FOLDER = os.path.join(UPLOAD_FOLDER_ROOT, 'hero_images')
 
 # Buat direktori jika belum ada
-for folder in [PHOTO_UPLOAD_FOLDER, BLOG_UPLOAD_FOLDER, HERO_UPLOAD_FOLDER]:
-    os.makedirs(folder, exist_ok=True)
+# for folder in [PHOTO_UPLOAD_FOLDER, BLOG_UPLOAD_FOLDER, HERO_UPLOAD_FOLDER]:
+#     os.makedirs(folder, exist_ok=True)
 
 PHOTO_URL_RELATIVE = 'uploads/gallery_images/'
 BLOG_URL_RELATIVE = 'uploads/blog_images/'
